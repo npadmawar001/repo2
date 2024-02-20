@@ -1,0 +1,75 @@
+class Book:
+    def __init__(self, title, author, year):
+        self.title = title
+        self.author = author
+        self.year = year
+
+class BookManagementSystem:
+    def __init__(self):
+        self.books = []
+
+    def add_book(self, book):
+        self.books.append(book)
+        print("Book added successfully.")
+
+    def display_books(self):
+        if not self.books:
+            print("No books available.")
+        else:
+            for i, book in enumerate(self.books, start=1):
+                print(f"{i}. Title: {book.title}, Author: {book.author}, Year: {book.year}")
+
+    def update_book(self, index, new_title, new_author, new_year):
+        if index < 1 or index > len(self.books):
+            print("Invalid book index.")
+        else:
+            self.books[index - 1].title = new_title
+            self.books[index - 1].author = new_author
+            self.books[index - 1].year = new_year
+            print("Book updated successfully.")
+
+    def delete_book(self, index):
+        if index < 1 or index > len(self.books):
+            print("Invalid book index.")
+        else:
+            del self.books[index - 1]
+            print("Book deleted successfully.")
+
+def main():
+    book_management_system = BookManagementSystem()
+
+    while True:
+        print("\n=== Book Management System Menu ===")
+        print("1. Add Book")
+        print("2. Display Books")
+        print("3. Update Book")
+        print("4. Delete Book")
+        print("5. Exit")
+
+        choice = input("Enter your choice: ")
+
+        if choice == '1':
+            title = input("Enter title: ")
+            author = input("Enter author: ")
+            year = input("Enter year: ")
+            book = Book(title, author, year)
+            book_management_system.add_book(book)
+        elif choice == '2':
+            book_management_system.display_books()
+        elif choice == '3':
+            index = int(input("Enter the index of the book to update: "))
+            new_title = input("Enter new title: ")
+            new_author = input("Enter new author: ")
+            new_year = input("Enter new year: ")
+            book_management_system.update_book(index, new_title, new_author, new_year)
+        elif choice == '4':
+            index = int(input("Enter the index of the book to delete: "))
+            book_management_system.delete_book(index)
+        elif choice == '5':
+            print("Exiting...")
+            break
+        else:
+            print("Invalid choice. Please try again.")
+
+if __name__ == "__main__":
+    main()
